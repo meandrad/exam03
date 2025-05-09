@@ -6,7 +6,7 @@
 /*   By: meandrad <meandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 20:51:31 by meandrad          #+#    #+#             */
-/*   Updated: 2025/04/30 21:23:42 by meandrad         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:26:48 by meandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_putnbr(int n)
 		num *= -1;
 	}
 	if (num >= 10)
-		ft_putnbr(num / 10);
+		count += ft_putnbr(num / 10);
 	count += ft_putchar((num % 10) + '0');
 	return (count);
 }
@@ -59,7 +59,7 @@ int	handle_hex(unsigned int n)
 
 	count = 0;
 	if (n >= 16)
-		handle_hex(n / 16);
+		count += handle_hex(n / 16);
 	if ((n % 16) < 10)
 		count += ft_putchar((n % 16) + '0');
 	else
@@ -108,6 +108,8 @@ int	ft_printf(const char *s, ...)
 int main (void)
 {
 	int count;
-	count = ft_printf("ola %s! Você tem %d de idade e esse é seu ID %x\n", "teste", -42, 16);
-	printf("%d", count);
+	int	count2;
+	count = ft_printf("ola %s! %d %x\n", "teste", -42, 16);
+	count2 = printf("ola %s! %d %x\n", "teste", -42, 16);
+	printf("%d\n%d\n", count, count2);
 }
