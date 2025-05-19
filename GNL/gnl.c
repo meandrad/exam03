@@ -6,12 +6,12 @@
 /*   By: meandrad <meandrad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 22:09:34 by meandrad          #+#    #+#             */
-/*   Updated: 2025/05/08 22:42:26 by meandrad         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:28:02 by meandrad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GNL
-# define GNL
+#ifndef GNL_H
+# define GNL_H
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -63,14 +63,30 @@ char	*gnl(int fd)
 			red = read(fd, buffer, BUFFER_SIZE);
 			pos = 0;
 			if (red <= 0)
-				break;
+				break ;
 		}
-		line[i++] = buffer[pos++];
+		line[i] = buffer[pos];
+		i++;
 		if (buffer[pos++] == '\n')
-			break;
+			break ;
 	}
 	line[i] = '\0';
 	if (i == 0)
 		return (NULL);
 	return (ft_strdup(line));
+}
+
+int main (void)
+{
+	int fd;
+	char *linha;
+
+	fd = open("gnl.c", O_RDONLY);
+	while ((linha = gnl(fd)) != NULL)
+	{
+		printf("%s", linha);
+		free(linha);
+	}
+	close(fd);
+	return (0);
 }
